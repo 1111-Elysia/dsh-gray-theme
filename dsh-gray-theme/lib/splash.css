@@ -1,0 +1,294 @@
+/* ============================================================================
+ * dsh-gray-theme — boot sequence (first paint only)
+ * Quiet archive cover: one portrait, one line, one exit. No password, no audio.
+ * ========================================================================== */
+
+.gray-boot {
+  --gb-ink: #e7f1f0;
+  --gb-mut: #9bb4b1;
+  --gb-dim: #6f8b89;
+  --gb-teal: #5eead4;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: grid;
+  overflow: hidden;
+  background: #060b0d;
+  color: var(--gb-ink);
+  font-family: "Inter", "Noto Sans CJK SC", "Noto Sans SC", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+.gray-boot *,
+.gray-boot *::before,
+.gray-boot *::after {
+  box-sizing: border-box;
+}
+
+.gray-boot.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gb-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 26%;
+  background-repeat: no-repeat;
+  filter: saturate(0.78) contrast(1.04) brightness(0.88);
+  transform: scale(1.02);
+  animation: gb-drift 7s cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
+}
+
+.gb-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(4, 10, 11, 0.96) 0%, rgba(4, 10, 11, 0.82) 34%, rgba(4, 10, 11, 0.18) 68%, rgba(4, 10, 11, 0.28) 100%),
+    linear-gradient(0deg, rgba(4, 10, 11, 0.88) 0%, transparent 38%);
+}
+
+.gb-frame {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  padding: clamp(20px, 3vw, 42px);
+}
+
+.gb-top,
+.gb-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--gb-dim);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: gb-in 600ms 100ms ease forwards;
+}
+
+.gb-top span:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--gb-teal);
+  vertical-align: 1px;
+}
+
+.gb-main {
+  align-self: end;
+  width: min(420px, 84vw);
+  padding-bottom: 3vh;
+}
+
+.gb-kicker {
+  margin-bottom: 10px;
+  color: var(--gb-teal);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: gb-in 600ms 220ms ease forwards;
+}
+
+.gb-title {
+  margin: 0;
+  font-family: "Noto Serif CJK SC", "Songti SC", STSong, serif;
+  font-size: clamp(30px, 3.4vw, 40px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  color: var(--gb-ink);
+  opacity: 0;
+  animation: gb-in 700ms 300ms ease forwards;
+}
+
+.gb-title span {
+  display: inline-block;
+  margin-left: 12px;
+  color: var(--gb-teal);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  vertical-align: 0.35em;
+}
+
+.gb-line {
+  max-width: 360px;
+  margin: 12px 0 0;
+  color: rgba(231, 241, 240, 0.82);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: gb-in 600ms 420ms ease forwards;
+}
+
+.gb-enter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-width: 186px;
+  margin-top: 22px;
+  padding: 9px 12px 9px 14px;
+  border: 1px solid rgba(94, 234, 212, 0.3);
+  border-radius: 2px;
+  background: rgba(6, 16, 17, 0.24);
+  color: var(--gb-ink);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0;
+  animation: gb-in 600ms 520ms ease forwards;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.gb-enter span {
+  color: var(--gb-teal);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.gb-enter:hover,
+.gb-enter:focus-visible {
+  background: rgba(94, 234, 212, 0.08);
+  border-color: var(--gb-teal);
+  outline: none;
+}
+
+.gb-skip {
+  letter-spacing: 0.06em;
+}
+
+.gb-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(231, 241, 240, 0.06);
+}
+
+.gb-progress i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(94, 234, 212, 0.1), var(--gb-teal));
+  transform-origin: left center;
+  animation: gb-progress var(--gb-duration, 3600ms) linear forwards;
+}
+
+.gray-boot.is-leaving .gb-progress i {
+  animation-play-state: paused;
+}
+
+@keyframes gb-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gb-drift {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes gb-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .gb-photo {
+    background-position: 62% 22%;
+    filter: saturate(0.7) contrast(1.04) brightness(0.8);
+  }
+  .gb-shade {
+    background:
+      linear-gradient(0deg, rgba(4, 10, 11, 0.97) 0%, rgba(4, 10, 11, 0.72) 38%, rgba(4, 10, 11, 0.06) 72%, rgba(4, 10, 11, 0.34) 100%),
+      linear-gradient(90deg, rgba(4, 10, 11, 0.5), transparent 78%);
+  }
+  .gb-frame {
+    padding: 18px;
+  }
+  .gb-main {
+    width: 100%;
+    padding-bottom: 7vh;
+  }
+  .gb-bottom span:first-child {
+    display: none;
+  }
+  .gb-bottom {
+    justify-content: flex-end;
+  }
+  .gb-title {
+    font-size: 30px;
+  }
+  .gb-title span {
+    margin-left: 9px;
+    font-size: 10px;
+  }
+  .gb-line {
+    margin-top: 10px;
+    font-size: 13px;
+  }
+  .gb-enter {
+    margin-top: 18px;
+  }
+}
+
+@media (max-height: 620px) and (min-width: 761px) {
+  .gb-main {
+    padding-bottom: 1vh;
+  }
+  .gb-line {
+    display: none;
+  }
+  .gb-enter {
+    margin-top: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gb-photo,
+  .gb-top,
+  .gb-bottom,
+  .gb-kicker,
+  .gb-title,
+  .gb-line,
+  .gb-enter {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  .gb-progress i {
+    animation: none;
+    transform: scaleX(1);
+  }
+  .gray-boot {
+    transition: none;
+  }
+}

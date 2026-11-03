@@ -1,0 +1,475 @@
+/* ============================================================================
+ * dsh-gray-theme — token-adjacent styling only.
+ * DSH owns the layout. This sheet adds the archive texture, type, focus ring,
+ * selection and scrollbars that alias tokens cannot express.
+ * ========================================================================== */
+
+html[data-gray-theme="on"] {
+  --gt-serif: "Noto Serif CJK SC", "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, serif;
+  --gt-mono: "JetBrains Mono", "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  --gt-signal: #5eead4;
+  --gt-signal-bright: #7ff7ea;
+  --gt-signal-soft: rgba(94, 234, 212, 0.12);
+  --gt-signal-line: rgba(94, 234, 212, 0.28);
+  --gt-paper: #070c0e;
+}
+
+html[data-gray-theme="on"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 1px;
+  z-index: 2147482000;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.55) 18%, rgba(94, 234, 212, 0.16) 46%, transparent 72%);
+}
+
+html[data-gray-theme="on"] body {
+  background-color: var(--dsw-alias-bg-base);
+  background-image:
+    radial-gradient(1100px 760px at 82% -12%, rgba(94, 234, 212, 0.055), transparent 62%),
+    radial-gradient(900px 680px at -8% 108%, rgba(94, 234, 212, 0.035), transparent 58%),
+    linear-gradient(rgba(94, 234, 212, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 234, 212, 0.018) 1px, transparent 1px);
+  background-size: auto, auto, 64px 64px, 64px 64px;
+  background-attachment: fixed;
+}
+
+html[data-gray-theme="on"] ::selection {
+  background: rgba(94, 234, 212, 0.26);
+  color: var(--dsw-alias-label-primary);
+}
+
+html[data-gray-theme="on"] :where(h1, h2, h3, h4) {
+  font-family: var(--gt-serif);
+  font-weight: 500;
+  letter-spacing: 0.015em;
+}
+
+html[data-gray-theme="on"] :where(blockquote) {
+  border-left: 1px solid var(--gt-signal-line);
+  padding-left: 14px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+html[data-gray-theme="on"] :where(hr) {
+  border: 0;
+  border-top: 1px solid var(--dsw-alias-border-l1);
+}
+
+html[data-gray-theme="on"] :where(code, pre, kbd, samp) {
+  font-family: var(--gt-mono);
+  font-variant-ligatures: none;
+}
+
+html[data-gray-theme="on"] :where(a):hover {
+  color: var(--gt-signal-bright);
+}
+
+html[data-gray-theme="on"] :where(button, [role="button"], a, input, select, textarea):focus-visible {
+  outline: 1px solid var(--gt-signal);
+  outline-offset: 2px;
+}
+
+html[data-gray-theme="on"] :where(input, textarea)::placeholder {
+  color: var(--dsw-alias-label-tertiary);
+}
+
+html[data-gray-theme="on"] * {
+  scrollbar-color: rgba(94, 234, 212, 0.24) transparent;
+  scrollbar-width: thin;
+}
+
+html[data-gray-theme="on"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html[data-gray-theme="on"] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html[data-gray-theme="on"] ::-webkit-scrollbar-thumb {
+  background: rgba(94, 234, 212, 0.18);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+html[data-gray-theme="on"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(94, 234, 212, 0.32);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+.__gt_root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: var(--dsw-alias-label-primary);
+  font-size: 13px;
+  max-width: 760px;
+}
+
+.__gt_hero {
+  position: relative;
+  min-height: 108px;
+  overflow: hidden;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 12px;
+  background: var(--dsw-alias-bg-layer-1);
+  display: flex;
+  align-items: flex-end;
+  padding: 14px 16px;
+  isolation: isolate;
+}
+
+.__gt_heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center 35%;
+  filter: saturate(0.75) contrast(1.05);
+  opacity: 0.5;
+}
+
+.__gt_heroShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(4, 10, 11, 0.94) 0%, rgba(4, 10, 11, 0.62) 55%, rgba(4, 10, 11, 0.18) 100%);
+}
+
+.__gt_heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.__gt_eyebrow,
+.__gt_meta {
+  font-family: var(--gt-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.__gt_title {
+  margin: 0;
+  font-family: var(--gt-serif);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #e7f1f0;
+}
+
+.__gt_sub {
+  margin: 0;
+  font-size: 11px;
+  color: rgba(231, 241, 240, 0.7);
+}
+
+.__gt_group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--dsw-alias-bg-layer-1) 72%, transparent);
+}
+
+.__gt_groupHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.__gt_groupTitle {
+  font-family: var(--gt-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.__gt_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.__gt_label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.__gt_label strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+}
+
+.__gt_hint {
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.__gt_select,
+.__gt_btn {
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 7px;
+  background: var(--dsw-alias-bg-layer-2);
+  color: var(--dsw-alias-label-primary);
+  font: inherit;
+  font-size: 12px;
+  padding: 6px 9px;
+  min-width: 136px;
+}
+
+.__gt_btn {
+  min-width: 0;
+  cursor: pointer;
+}
+
+.__gt_btn:hover {
+  border-color: var(--gt-signal-line);
+}
+
+.__gt_btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.__gt_btnPrimary {
+  border-color: var(--dsw-alias-button-primary-fill);
+  background: var(--dsw-alias-button-primary-fill);
+  color: var(--dsw-alias-label-primary-foreground);
+}
+
+.__gt_actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.__gt_status {
+  font-family: var(--gt-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.__gt_dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--gt-signal);
+  box-shadow: 0 0 8px var(--gt-signal);
+  vertical-align: 1px;
+}
+
+.__gt_gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 8px;
+}
+
+.__gt_thumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 6px;
+  background: var(--dsw-alias-bg-layer-2);
+  cursor: pointer;
+}
+
+.__gt_thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  filter: saturate(0.72);
+  transition: filter 160ms ease, transform 220ms ease;
+}
+
+.__gt_thumb[data-active="true"] {
+  border-color: var(--gt-signal);
+  box-shadow: 0 0 0 1px var(--gt-signal-line);
+}
+
+.__gt_thumb:hover img,
+.__gt_thumb[data-active="true"] img {
+  filter: saturate(0.95);
+  transform: scale(1.03);
+}
+
+.__gt_thumb span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 5px 4px;
+  font-family: var(--gt-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: #e7f1f0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  .__gt_hero {
+    min-height: 104px;
+  }
+  .__gt_row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .__gt_select {
+    width: 100%;
+  }
+}
+
+/* Settings panel controls — contained, so they never affect DSH chrome. */
+.__gt_row input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 20px;
+  margin: 0;
+  border: 1px solid var(--dsw-alias-border-l3);
+  border-radius: 999px;
+  background: var(--dsw-alias-bg-layer-3);
+  position: relative;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.__gt_row input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--dsw-alias-label-tertiary);
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.__gt_row input[type="checkbox"]:checked {
+  border-color: var(--gt-signal-line);
+  background: var(--gt-signal-soft);
+}
+
+.__gt_row input[type="checkbox"]:checked::after {
+  transform: translateX(14px);
+  background: var(--gt-signal);
+}
+
+/* Compact settings on narrow screens: the Gray section gets the full width,
+   while DSH's own section nav becomes a horizontal strip. */
+@media (max-width: 640px) {
+  .__gt_root {
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .__gt_hero {
+    min-height: 112px;
+    padding: 12px;
+  }
+
+  .__gt_title { font-size: 18px; }
+  .__gt_sub { font-size: 11px; }
+  .__gt_gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  [role="dialog"]:has(.__gt_root) {
+    flex-direction: column;
+  }
+
+  [role="dialog"]:has(.__gt_root) > nav {
+    flex: 0 0 auto;
+    width: 100% !important;
+    height: auto;
+    max-height: 48px;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-right: 0;
+    border-bottom: 1px solid var(--dsw-alias-border-l1);
+  }
+
+  [role="dialog"]:has(.__gt_root) > nav > * {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  [role="dialog"]:has(.__gt_root) > div {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  [role="dialog"]:has(.__gt_root) > nav {
+    padding: 6px 12px;
+    align-items: center;
+  }
+
+  [role="dialog"]:has(.__gt_root) > nav > div:first-child {
+    display: none;
+  }
+
+  [role="dialog"]:has(.__gt_root) > nav > div:last-child {
+    flex: 1 1 auto;
+    width: 100%;
+    overflow-x: auto;
+    gap: 6px;
+  }
+
+  [role="dialog"]:has(.__gt_root) > nav > div:last-child > * {
+    flex: 0 0 auto;
+    width: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  [role="dialog"]:has(.__gt_root) > nav {
+    align-items: stretch;
+    padding: 4px 8px;
+  }
+
+  [role="dialog"]:has(.__gt_root) > nav > div:last-child {
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    height: 40px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  [role="dialog"]:has(.__gt_root) > nav > div:last-child > button {
+    flex: 0 0 auto;
+    width: auto;
+    height: 32px;
+  }
+}
